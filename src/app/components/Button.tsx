@@ -1,4 +1,3 @@
-
 type ButtonProp = {
     titulo: string,
     funcao: () => void,
