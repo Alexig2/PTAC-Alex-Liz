@@ -1,0 +1,8 @@
+.botao:hover{
+    color: rgb(255, 208, 0);
+    cursor: pointer;
+}
+
+.btnEntrar{
+    background-color: yellow ;
+}

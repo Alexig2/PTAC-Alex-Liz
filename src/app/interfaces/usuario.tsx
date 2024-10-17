@@ -1,9 +1,9 @@
 interface Usuario {
-  id: number,
+  id?: number,
   nome: string,
   email: string, // se eu fizer email?: string singnifica que não é obrigatório preencher
   password: string,
-  tipo: 'cliente' | 'adm'
+  tipo?: 'cliente' | 'adm'
 }
 
 /* Caso tiver dúvida parte1
