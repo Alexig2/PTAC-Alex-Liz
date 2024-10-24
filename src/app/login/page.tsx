@@ -4,6 +4,10 @@ import styless from "../styles/login.module.css";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
+
+  //const teste = [1, 2, 3, 4]
+  //teste.map((item) => {console.log(item)})
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       const response = await fetch(
