@@ -3,7 +3,6 @@ import styles from "./page.module.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Titulo from "./components/Titulo";
-import Button from "./components/Button";
 
 export default function Home() {
   const [user, setUser] = useState(false);
@@ -19,9 +18,12 @@ export default function Home() {
   if (user == false) {
     return (
       <div className={styles.page}>
-        <Titulo titulo="Reserva" />
-        <Button titulo="Quero comer" funcao={funcaoTeste} />
-        <button onClick={() => route.push("/login")}>Login</button>
+        <div className={styles.cardTitulo}>
+          <Titulo titulo="Reserva" />
+        </div>
+        <div className={styles.cardBotao}>
+          <button className={styles.botao} onClick={() => route.push("/login")}>Login</button>
+        </div>
       </div>
     );
   } else {
