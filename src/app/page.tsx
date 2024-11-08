@@ -21,6 +21,9 @@ export default function Home() {
         <div className={styles.cardTitulo}>
           <Titulo titulo="Reserva" />
         </div>
+        <div>
+          <img src="/images/fundo2.jpg" alt="" />
+        </div>
         <div className={styles.cardBotao}>
           <button className={styles.botao} onClick={() => route.push("/login")}>Login</button>
         </div>

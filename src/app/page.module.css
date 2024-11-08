@@ -1,11 +1,13 @@
 .cardTitulo {
-  background-color: #26979f;
+  background-color: #592512;
   padding: 50px;
 }
 
 .cardBotao {
   text-align: center;
-  background-color: #e84d5b;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.0); /* Define o nível de escurecimento */
+  background-blend-mode: darken;
   margin: 100px;
   margin-left: 550px;
   margin-right: 550px;
@@ -15,8 +17,9 @@
 }
 
 .botao {
-    background-color: #eae2cf; /* Fundo branco */
-    color: #3b3b3b; /* Cor do texto */
+    background-color: rgb(0, 0, 0 ,0.6); /* Fundo branco */
+    color: white; /* Cor do texto */
+    font-weight: bold;
     border-radius: 5px; /* Cantos arredondados */
     padding: 10px 20px; /* Espaçamento interno */
     font-size: 16px; /* Tamanho da fonte */
@@ -26,7 +29,7 @@
 }
 
 .botao:hover {
-    background-color: lightgray; /* Cor de fundo ao passar o mouse */
-    color: white; /* Cor do texto ao passar o mouse */
+    background-color: rgb(230, 230, 230); /* Cor de fundo ao passar o mouse */
+    color: rgb(0, 0, 0); /* Cor do texto ao passar o mouse */
 }
 
