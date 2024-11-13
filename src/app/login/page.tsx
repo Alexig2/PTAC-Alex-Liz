@@ -47,20 +47,20 @@ export default function Login() {
   
   return (
     <main className={styless.fundo}>
+      <form onSubmit={onSubmit} className={styless.container}>
       <h1 className={styless.h1}>Login</h1>
-      <form onSubmit={onSubmit}>
         <div>
           <label>E-mail</label>
-          <input type="email" name="email" required onChange={(e) => {setEmail(e.target.value)}}/>
+          <input className={styless.input} type="email" name="email" required onChange={(e) => {setEmail(e.target.value)}}/>
         </div>
         <div>
           <label>Senha</label>
-          <input type="password" name="senha" required onChange={(e) => {setSenha(e.target.value)}}/>
+          <input className={styless.input} type="password" name="senha" required onChange={(e) => {setSenha(e.target.value)}}/>
         </div>
 
-        <button type="submit">Entrar</button>
+        <button type="submit" className={styless.button}>Entrar</button>
 
-        <p className={styless.botao} onClick={() => route.push("/cadastro")}>
+        <p className={styless.a} onClick={() => route.push("/cadastro")}>
           Cadastrar
         </p>
       </form>
