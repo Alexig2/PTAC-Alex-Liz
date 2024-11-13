@@ -17,15 +17,17 @@ export default function Home() {
 
   if (user == false) {
     return (
-      <div className={styles.page}>
+      <div className={styles.fundo}>
         <div className={styles.cardTitulo}>
           <Titulo titulo="Reserva" />
         </div>
         <div className={styles.cardBotao}>
-          <button className={styles.botao} onClick={() => route.push("/login")}>Login</button>
+          <button className={styles.botao} onClick={() => route.push("/login")}>
+            Login
+          </button>
         </div>
       </div>
-    );
+    )
   } else {
     return (
       <div className={styles.page}>

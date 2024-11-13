@@ -33,3 +33,11 @@
     color: rgb(0, 0, 0); /* Cor do texto ao passar o mouse */
 }
 
+.fundo {
+  background-image: url('images/fundo2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(0, 0, 0, 0.2); /* Define o nível de escurecimento */
+  background-blend-mode: darken;
+  height: 648px;
+}
