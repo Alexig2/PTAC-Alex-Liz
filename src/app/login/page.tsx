@@ -3,51 +3,67 @@ import styles from "../page.module.css";
 import styless from "../styles/login.module.css";
 import { useRouter } from "next/navigation";
 import Usuario from "../interfaces/usuario";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import { ApiURL } from "../config";
+import { setCookie , parseCookies} from "nookies";
+
+interface ResponseSignin {
+  erro: boolean,
+  mensagem: string,
+  token?: string
+}
+
+
 
 export default function Login() {
   const router =useRouter()
-  const [senha, setSenha] = useState<string>();
+  const [password, setPassword] = useState<string>();
   const [email, setEmail] = useState<string>();
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const route = useRouter();
+  const [error, setError] = useState("")
+  
+  useEffect(() => {
+    const {'restaurant-token' : token} = parseCookies()
+    if (!token){
+      router.push('/login')
+    }
+  }, [])
+
+  const  handleSubmit = async (e : FormEvent) => {
+    e.preventDefault();
     try {
-      const response = await fetch(
-        "https://prof-jeferson.github.io/API-reservas/usuarios.json"
-      );
-      if (!response) {
-        console.log("Erro ao buscar");
-      }
-      const usuarios = await response.json();
-
-      const usuarioConvertidos: Usuario[] = usuarios as Usuario[];
-
-      if (!usuarios) {
-        console.log("Erro ao buscar");
-      } else {
-        const user =  usuarioConvertidos.find(
-          (user) => user.email == email && user.password == senha
-        );
-        if(user){
-          localStorage.setItem("usuario", JSON.stringify(user));
+     const response = await fetch(`${ApiURL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify({email, password})
+     })
+      if (response){
+        const data : ResponseSignin = await response.json()
+        const {erro, mensagem, token = ''} = data;
+        console.log(data)
+        if (erro){
+          setError(mensagem)
+        } else {
+          // npm i nookies setCookie
+          setCookie(undefined, 'restaurant-token', token, {
+            maxAge: 60*60*1 // 1 hora
+          } )
 
         }
+      } else {
+
       }
-    } catch {}
-  };
+  } 
+   catch (error) {
+  console.error('Erro na requisicao', error)
+}
+}
 
-  useEffect(() => {
-    const usuarioLogado = localStorage.getItem("usuario");
-    if (usuarioLogado) {
-      console.log(usuarioLogado);
-      router.push("/");
-    }
-  }, []);
-
-  const route = useRouter();
-  
   return (
     <main className={styless.fundo}>
-      <form onSubmit={onSubmit} className={styless.container}>
+      <form onSubmit={handleSubmit} className={styless.container}>
       <h1 className={styless.h1}>Login</h1>
         <div>
           <label>E-mail</label>
@@ -55,7 +71,7 @@ export default function Login() {
         </div>
         <div>
           <label>Senha</label>
-          <input className={styless.input} type="password" name="senha" required onChange={(e) => {setSenha(e.target.value)}}/>
+          <input className={styless.input} type="password" name="senha" required onChange={(e) => {setPassword(e.target.value)}}/>
         </div>
 
         <button type="submit" className={styless.button}>Entrar</button>

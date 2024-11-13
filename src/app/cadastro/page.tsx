@@ -3,7 +3,6 @@ import { useState } from "react";
 import styles from "../page.module.css";
 import Usuario from "../interfaces/usuario"
 
-
 export default function Cadastro() {
   const [usuario, setUsuario] = useState<Usuario>({
     nome: '',
