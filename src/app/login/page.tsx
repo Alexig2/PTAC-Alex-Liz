@@ -15,8 +15,8 @@ interface ResponseSignin {
 
 export default function Login() {
   const router = useRouter();
-  const [password, setPassword] = useState<string>();
-  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [error, setError] = useState("");
 
   useEffect(() => {

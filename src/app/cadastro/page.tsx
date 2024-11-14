@@ -59,7 +59,7 @@ export default function Cadastro() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ nome: usuario.nome, email: usuario.email, password: usuario.password })
+        body: JSON.stringify(usuario)
       });
       if (response) {
         const data: ResponseSignin = await response.json();
