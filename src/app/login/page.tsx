@@ -17,7 +17,6 @@ export default function Login() {
   const router = useRouter();
   const [password, setPassword] = useState<string>();
   const [email, setEmail] = useState<string>();
-  const route = useRouter();
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -25,7 +24,7 @@ export default function Login() {
     if (!token) {
       router.push("/login");
     }
-  }, []);
+  }, [router]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -51,15 +50,13 @@ export default function Login() {
           // npm i nookies setCookie
           setCookie(undefined, "restaurant-token", token, {
             maxAge: 60 * 60 * 1, // 1 hora
-          });
+          })
+          router.push('/')
         }
-      } else {
       }
     } catch (error) {
       console.error("Erro na requisicao", error);
     }
-    console.log("Email", email);
-    console.log("Senha", password);
   };
 
   return (
@@ -71,6 +68,8 @@ export default function Login() {
           <input
             className={styless.input}
             type="email"
+            id="email"
+            value={email}
             name="email"
             required
             onChange={(e) => {
@@ -83,7 +82,9 @@ export default function Login() {
           <input
             className={styless.input}
             type="password"
-            name="senha"
+            name="password"
+            id="senha"
+            value={password}
             required
             onChange={(e) => {
               setPassword(e.target.value);
@@ -91,11 +92,14 @@ export default function Login() {
           />
         </div>
 
+        {error && <p>{error}</p>}
+
+
         <button type="submit" className={styless.button}>
           Entrar
         </button>
 
-        <p className={styless.a} onClick={() => route.push("/cadastro")}>
+        <p className={styless.a} onClick={() => router.push("/cadastro")}>
           Cadastrar
         </p>
       </form>
