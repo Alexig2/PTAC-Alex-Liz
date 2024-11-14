@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import styles from "../page.module.css";
 import styless from "../styles/cadastro.module.css";
 import Usuario from "../interfaces/usuario";
 import { FormEvent, useEffect } from "react";
@@ -15,20 +14,18 @@ interface ResponseSignin {
 }
 
 export default function Cadastro() {
-  const [password, setPassword] = useState<string>();
-  const [email, setEmail] = useState<string>();
   const [usuario, setUsuario] = useState<Usuario>({
     nome: "",
     email: "",
-    password: "",
+    password: ""
   });
 
   const [erro, setError] = useState("");
   const router = useRouter();
 
   const alterarNome = (novoNome: string) => {
-    setUsuario((valAntes) => ({
-      ...valAntes,
+    setUsuario((valoresAnteriores) => ({
+      ...valoresAnteriores,
       nome: novoNome,
     }));
   };
@@ -62,7 +59,7 @@ export default function Cadastro() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ nome: usuario.nome, email: usuario.email, password: usuario.password })
       });
       if (response) {
         const data: ResponseSignin = await response.json();
@@ -74,9 +71,9 @@ export default function Cadastro() {
           // npm i nookies setCookie
           setCookie(undefined, "restaurant-token", token, {
             maxAge: 60 * 60 * 1, // 1 hora
-          });
+          })
+          router.push("/")
         }
-      } else {
       }
     } catch (error) {
       console.error("Erro na requisicao", error);
@@ -117,7 +114,8 @@ export default function Cadastro() {
             className={styless.input}
             type="password"
             name="password"
-            id="password"
+            id="senha"
+            minLength={8}
             value={usuario.password}
             onChange={(e) => alterarSenha(e.target.value)}
             required

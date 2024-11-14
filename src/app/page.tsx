@@ -7,13 +7,6 @@ import Titulo from "./components/Titulo";
 export default function Home() {
   const [user, setUser] = useState(false);
   const route = useRouter();
-  const funcaoTeste = () => {
-    let n1 = 1;
-    let n2 = 2;
-    let soma = n1 + n2;
-    console.log(soma);
-    return <h1>Sei lá</h1>;
-  };
 
   if (user == false) {
     return (
