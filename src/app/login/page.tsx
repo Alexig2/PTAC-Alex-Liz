@@ -21,8 +21,8 @@ export default function Login() {
 
   useEffect(() => {
     const { "restaurant-token": token } = parseCookies();
-    if (!token) {
-      router.push("/login");
+    if (token) {
+      router.push("/");
     }
   }, [router]);
 
