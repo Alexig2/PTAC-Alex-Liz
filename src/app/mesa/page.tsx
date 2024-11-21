@@ -11,7 +11,7 @@ const mesa = () => {
 
   return (
     <div>
-      <h1>Perfil Usuário</h1>
+      <h1>Mesa</h1>
       <p>Código: {mesa.codigo}</p>
       <p>Lugares: {mesa.n_lugares}</p>
     </div>
