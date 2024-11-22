@@ -1,57 +1,59 @@
-.fundo {    
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background: url('../images/Fundo comida.jpg') no-repeat center center fixed;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: #ffffff;
+.fundo {
+  margin: 0;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  background-image: url("../images/Fundo comida.jpg");
+  background-position: top;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #ffffff;
 }
 
 .container {
-background: rgba(0, 0, 0, 0.6);
-padding: 40px;
-border-radius: 10px;
-max-width: 400px;
-width: 100%;
-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .h1 {
-font-size: 24px;
-margin-bottom: 20px;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 .button {
-width: 100%;
-padding: 12px;
-border: none;
-border-radius: 5px;
-background-color: #000; 
-color: #fff;
-font-size: 16px;
-cursor: pointer;
-transition: background-color 0.3s;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #000;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .button:hover {
-background-color: #333; 
+  background-color: #333;
 }
 
 .a {
-color: #ddd;
-font-size: 14px;
-text-decoration: none;
-cursor: pointer;
+  color: #ddd;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .checkbox {
-display: flex;
-align-items: center;
-font-size: 14px;
-color: #ccc;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #ccc;
 }
 
 .input {

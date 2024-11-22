@@ -18,10 +18,11 @@ export default function Home() {
 
   if (user) {
     return (
+        <div>
       <div className={styles.fundo}>
-        <div className={styles.cardTitulo}>
+        <nav className={styles.cardTitulo}>
           <Titulo titulo="Home" />
-        </div>
+        </nav>
         <div className={styles.cardBotao}>
           <button
             className={styles.botao}
@@ -30,6 +31,7 @@ export default function Home() {
             Reservar
           </button>
         </div>
+      </div>
       </div>
     );
   } else {

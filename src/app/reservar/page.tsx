@@ -1,6 +1,6 @@
 "use client";
 import styles from "./page.module.css";
-import styless from "../styles/login.module.css";
+import styless from "../styles/reservar.module.css";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Titulo from "../components/Titulo";
@@ -27,8 +27,8 @@ export default function Reservar() {
 
   const [reserva, setReserva] = useState<Reserva>({
     n_pessoas: 0,
-    status: false// ,
-    //data: NAO SEI
+    status: false,
+    data: new Date('2024-01-01')
   });
 
   const [erro, setError] = useState("");
@@ -47,12 +47,12 @@ export default function Reservar() {
     }));
   };
 
-  // const alterarData = (novaData: Date) => {
-  //   setReserva((valoresAnteriores) => ({
-  //     ...valoresAnteriores,
-  //     data: novaData,
-  //   }));
-  // };
+  const alterarData = (novaData: Date) => {
+    setReserva((valoresAnteriores) => ({
+      ...valoresAnteriores,
+      data: novaData,
+    }));
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -94,22 +94,22 @@ export default function Reservar() {
             type="number"
             name="n_pessoas"
             value={reserva.n_pessoas}
-            onChange={(e) => alterarNPessoas(e.target.value)}
+            onChange={(e) => alterarNPessoas(parseInt(e.target.value))}
             required
           />
         </div>
 {/* TEM Q COLOCAR O STATUS COMO TRUE DE ALGUM JEITO */}
-        {/* <div>
+        <div>
           <label>Data</label>
           <input
             className={styless.input}
             type="date"
             name="data"
-            value={reservar.data}
+            value= {reserva.data}
             onChange={(e) => alterarData(e.target.value)}
             required
           />
-        </div> */}
+        </div>
 
         {erro && <p>{erro}</p>}
 

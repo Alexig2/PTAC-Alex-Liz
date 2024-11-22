@@ -1,8 +1,12 @@
 .fundo {    
     margin: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-image: url('../images/Fundo comida.jpg');
-    background-position: top;
+    background-image: url('../images/Pessoas.jpg');
+    background-image: no-repeat;
+    background-color: rgba(0, 0, 0, 0.2); /* Define o nível de escurecimento */
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: darken;
     background-size: cover;
     display: flex;
     justify-content: center;

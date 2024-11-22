@@ -5,7 +5,7 @@ type TituloProp = {
 }
 
 const Titulo: React.FC<TituloProp> = ({ titulo }) => {
-  return <h1 className={styles.titulo}>{titulo}</h1>
+  return <div className={styles.titulo}>{titulo}</div>
 }
 
 export default Titulo;
