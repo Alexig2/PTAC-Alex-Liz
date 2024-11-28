@@ -1,11 +1,8 @@
 "use client";
-import styles from "./page.module.css";
-import styless from "../styles/reservar.module.css";
+import styles from "../styles/reservar.module.css";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Titulo from "../components/Titulo";
 import { parseCookies, setCookie } from "nookies";
-import Usuario from "../interfaces/usuario";
 import Reserva from "../interfaces/reserva";
 import { ApiURL } from "../../../config";
 
@@ -28,10 +25,21 @@ export default function Reservar() {
   const [reserva, setReserva] = useState<Reserva>({
     n_pessoas: 0,
     status: false,
-    data: new Date('2024-01-01')
+    data: new Date("2024-01-01"),
   });
 
   const [erro, setError] = useState("");
+
+  function convertDateToString() {
+    return reserva.data?.toISOString().split("T")[0];
+  }
+
+  const mesas = [
+    { id: 1, n_pessoas: 4 },
+    { id: 2, n_pessoas: 6 },
+    { id: 3, n_pessoas: 2 },
+    { id: 4, n_pessoas: 2 },
+  ];
 
   const alterarNPessoas = (novoNPessoas: number) => {
     setReserva((valoresAnteriores) => ({
@@ -39,7 +47,7 @@ export default function Reservar() {
       n_pessoas: novoNPessoas,
     }));
   };
-  
+
   const alterarStatus = (novoStatus: boolean) => {
     setReserva((valoresAnteriores) => ({
       ...valoresAnteriores,
@@ -55,6 +63,7 @@ export default function Reservar() {
   };
 
   const handleSubmit = async (e: FormEvent) => {
+
     e.preventDefault();
     try {
       const response = await fetch(`${ApiURL}/auth/reservar`, {
@@ -84,13 +93,21 @@ export default function Reservar() {
   };
 
   return (
-    <main className={styless.fundo}>
-      <form onSubmit={handleSubmit} className={styless.container}>
-        <h1 className={styless.h1}>Reservar</h1>
+    <main className={styles.fundo}>
+      <form onSubmit={handleSubmit} className={styles.container}>
+        <h1 className={styles.h1}>Reservar</h1>
+        <div>
+          <label>Mesas Disponíveis</label>
+          <select className={styles.input} name="mesaDisp" id="">
+            {mesas.map((mesa) => {
+              return <option value="">Mesa {mesa.id}</option>;
+            })}
+          </select>
+        </div>
         <div>
           <label>Número de Pessoas</label>
           <input
-            className={styless.input}
+            className={styles.input}
             type="number"
             name="n_pessoas"
             value={reserva.n_pessoas}
@@ -98,22 +115,22 @@ export default function Reservar() {
             required
           />
         </div>
-{/* TEM Q COLOCAR O STATUS COMO TRUE DE ALGUM JEITO */}
+        {/* TEM Q COLOCAR O STATUS COMO TRUE DE ALGUM JEITO */}
         <div>
           <label>Data</label>
           <input
-            className={styless.input}
+            className={styles.input}
             type="date"
             name="data"
-            value= {reserva.data}
-            onChange={(e) => alterarData(e.target.value)}
+            value={convertDateToString()}
+            onChange={(e) => alterarData(new Date(e.target.value))}
             required
           />
         </div>
 
         {erro && <p>{erro}</p>}
 
-        <button type="submit" className={styless.button}>
+        <button type="submit" className={styles.button}>
           Reservar
         </button>
       </form>

@@ -1,8 +1,6 @@
 "use client";
-import styles from "../page.module.css";
-import styless from "../styles/login.module.css";
+import styles from "../styles/login.module.css";
 import { useRouter } from "next/navigation";
-import Usuario from "../interfaces/usuario";
 import { FormEvent, useEffect, useState } from "react";
 import { ApiURL } from "../../../config";
 import { setCookie, parseCookies } from "nookies";
@@ -60,13 +58,13 @@ export default function Login() {
   };
 
   return (
-    <main className={styless.fundo}>
-      <form onSubmit={handleSubmit} className={styless.container}>
-        <h1 className={styless.h1}>Login</h1>
+    <main className={styles.fundo}>
+      <form onSubmit={handleSubmit} className={styles.container}>
+        <h1 className={styles.h1}>Login</h1>
         <div>
           <label>E-mail</label>
           <input
-            className={styless.input}
+            className={styles.input}
             type="email"
             id="email"
             value={email}
@@ -80,7 +78,7 @@ export default function Login() {
         <div>
           <label>Senha</label>
           <input
-            className={styless.input}
+            className={styles.input}
             type="password"
             name="password"
             id="senha"
@@ -95,11 +93,11 @@ export default function Login() {
         {error && <p>{error}</p>}
 
 
-        <button type="submit" className={styless.button}>
+        <button type="submit" className={styles.button}>
           Entrar
         </button>
 
-        <p className={styless.a} onClick={() => router.push("/cadastro")}>
+        <p className={styles.a} onClick={() => router.push("/cadastro")}>
           Cadastrar
         </p>
       </form>

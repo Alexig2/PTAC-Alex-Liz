@@ -1,6 +1,6 @@
 interface Mesa {
   id?: number,
-  codigo: string,
+  codigo?: string,
   n_lugares: number,
 }
 
