@@ -1,106 +1,106 @@
-"use client";
-import styles from "../styles/login.module.css";
-import { useRouter } from "next/navigation";
-import { FormEvent, useEffect, useState } from "react";
-import { ApiURL } from "../../../config";
-import { setCookie, parseCookies } from "nookies";
+'use client';
 
-interface ResponseSignin {
-  erro: boolean;
-  mensagem: string;
-  token?: string;
-}
+import { useEffect, useState, FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Button from '../components/Button';
+import styles from '../styles/login.module.css';
+import Link from 'next/link';
+import { setCookie, parseCookies } from 'nookies';
+import { ApiURL } from '../../../config';
 
-export default function Login() {
+const PaginaLogin = () => {
+  const [usuario, setUsuario] = useState('');
+  const [senha, setSenha] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+
+
   const router = useRouter();
-  const [password, setPassword] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [error, setError] = useState("");
 
+  // verifica se o usuário já está logado ao carregar a página
   useEffect(() => {
-    const { "restaurant-token": token } = parseCookies();
+    const { 'restaurant-token': token } = parseCookies();
     if (token) {
-      router.push("/");
+      console.log("logado");
     }
   }, [router]);
 
+  // função chamada ao enviar o formulário
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    try {
+    e.preventDefault(); 
+    try {  
       const response = await fetch(`${ApiURL}/auth/login`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: usuario, password: senha }),
       });
 
-      if (response) {
-
-        const data: ResponseSignin = await response.json();
-        const { erro, mensagem, token = "" } = data;
-
-        console.log(data);
+      if (response.ok) {
+        const data = await response.json();
+        const { erro, mensagem, token } = data;
 
         if (erro) {
-          setError(mensagem);
+          setErrorMsg(mensagem); 
         } else {
-          // npm i nookies setCookie
-          setCookie(undefined, "restaurant-token", token, {
-            maxAge: 60 * 60 * 1, // 1 hora
-          })
-          router.push('/')
+          setCookie(undefined, 'restaurant-token', token, {
+            maxAge: 60 * 60 * 1, 
+          });
+          router.push('/'); 
         }
+      } else {
+        setErrorMsg('Erro ao fazer login. Verifique suas credenciais.');
       }
     } catch (error) {
-      console.error("Erro na requisicao", error);
+      console.error('Erro na requisição', error);
+      setErrorMsg('Ocorreu um erro. Tente novamente mais tarde.');
     }
   };
 
   return (
-    <main className={styles.fundo}>
-      <form onSubmit={handleSubmit} className={styles.container}>
-        <h1 className={styles.h1}>Login</h1>
-        <div>
-          <label>E-mail</label>
-          <input
-            className={styles.input}
-            type="email"
-            id="email"
-            value={email}
-            name="email"
-            required
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-        </div>
-        <div>
-          <label>Senha</label>
-          <input
-            className={styles.input}
-            type="password"
-            name="password"
-            id="senha"
-            value={password}
-            required
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-        </div>
+    <>
+      <Header />
+      <div className={styles.container}>
+        <div className={styles.background}></div> 
+        <form onSubmit={handleSubmit} className={styles.formulario}>
+          <h1 className={styles.titulo}>Login</h1>
+          <div className={styles.grupoInput}>
+            <label htmlFor="usuario" className={styles.label}>
+              Usuário:
+            </label>
+            <input
+              type="text"
+              id="usuario"
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.grupoInput}>
+            <label htmlFor="senha" className={styles.label}>
+              Senha:
+            </label>
+            <input
+              type="password"
+              id="senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              className={styles.input}
+            />
+          </div>
+          {errorMsg && <p className={styles.errorMsg}>{errorMsg}</p>}
+          <Button titulo="Entrar" tipo="submit" />
 
-        {error && <p>{error}</p>}
-
-
-        <button type="submit" className={styles.button}>
-          Entrar
-        </button>
-
-        <p className={styles.a} onClick={() => router.push("/cadastro")}>
-          Cadastrar
-        </p>
-      </form>
-    </main>
+          <Link href="./cadastrar">
+            <Button titulo="Cadastrar" tipo="submit" />
+          </Link>
+        </form>
+      </div>
+      <Footer />
+    </>
   );
-}
+};
+
+export default PaginaLogin;
