@@ -4,12 +4,19 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Titulo from "./components/Titulo";
 import { parseCookies } from "nookies";
+import Mesa from "./interfaces/mesa";
 
 export default function Home() {
   const [user, setUser] = useState(false);
   const router = useRouter();
+  const [mesas, setMesas] = useState<Mesa[]>([]) //aaaa
 
   useEffect(() => {
+    async function fetchData(){
+      const response = await fetch('http://localhost:3333/reservas') //aaaa
+      console.log(await response.json())
+    }
+
     const { "restaurant-token": token } = parseCookies();
     if (token) {
       setUser(true);
