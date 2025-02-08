@@ -12,11 +12,13 @@ interface ResponseSignin {
 }
 
 export default function Login() {
+  //Criando as variáveis de estado
   const router = useRouter();
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [error, setError] = useState("");
 
+  //Verifica se está logado e se sim, redireciona para a home
   useEffect(() => {
     const { "restaurant-token": token } = parseCookies();
     if (token) {
@@ -24,6 +26,7 @@ export default function Login() {
     }
   }, [router]);
 
+  //Envia os dados do formulário
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {

@@ -6,9 +6,11 @@ import Titulo from "./components/Titulo";
 import { parseCookies } from "nookies";
 
 export default function Home() {
+  //Variável de estado que inicia o usuário como não cadastrado
   const [user, setUser] = useState(false);
   const router = useRouter();
 
+  //Se há token, o usuário está cadastrado, então setUser = true. Se não página é diferente para o não logado
   useEffect(() => {
     const { "restaurant-token": token } = parseCookies();
     if (token) {
@@ -16,6 +18,7 @@ export default function Home() {
     }
   }, [router]);
 
+  //Se logado
   if (user) {
     return (
         <div>
@@ -34,7 +37,7 @@ export default function Home() {
       </div>
       </div>
     );
-  } else {
+  } else { //Se não está logado
     return (
       <div className={styles.fundo}>
         <div className={styles.cardTitulo}>

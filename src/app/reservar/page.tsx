@@ -9,6 +9,7 @@ import { ApiURL } from "../../../config";
 export default function Reservar() {
   const router = useRouter();
 
+  //Verifica se está logado, se não estiver ele é redirecionado para a página home
   useEffect(() => {
     const { "restaurant-token": token } = parseCookies();
     if (!token) {
@@ -22,6 +23,7 @@ export default function Reservar() {
     token?: string;
   }
 
+  //Iniciando a reserva com valor genérico
   const [reserva, setReserva] = useState<Reserva>({
     n_pessoas: 0,
     status: false,
@@ -41,6 +43,7 @@ export default function Reservar() {
     { id: 4, n_pessoas: 2 },
   ];
 
+  //Funções de alteração
   const alterarNPessoas = (novoNPessoas: number) => {
     setReserva((valoresAnteriores) => ({
       ...valoresAnteriores,
@@ -64,6 +67,7 @@ export default function Reservar() {
 
   const handleSubmit = async (e: FormEvent) => {
 
+    //Função para realizar a reserva no banco de dados
     e.preventDefault();
     try {
       const response = await fetch(`${ApiURL}/auth/reservar`, {
@@ -115,7 +119,6 @@ export default function Reservar() {
             required
           />
         </div>
-        {/* TEM Q COLOCAR O STATUS COMO TRUE DE ALGUM JEITO */}
         <div>
           <label>Data</label>
           <input

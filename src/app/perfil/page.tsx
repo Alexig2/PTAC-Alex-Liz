@@ -10,6 +10,7 @@ const perfil = () => {
       email: "joselima@gmail.com",
     }; */
 
+    //Criando um exemplo de usuário
   const [usuario, setUsuario] = useState<Usuario>({
     id: 1,
     nome: "jose",

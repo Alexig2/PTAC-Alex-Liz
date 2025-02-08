@@ -12,17 +12,19 @@ interface ResponseSignin {
   mensagem: string;
   token?: string;
 }
-
 export default function Cadastro() {
+  //Estado para armazenar os valores do usuário
   const [usuario, setUsuario] = useState<Usuario>({
     nome: "",
     email: "",
     password: ""
   });
 
+  //Mensagem de erro
   const [erro, setError] = useState("");
   const router = useRouter();
 
+  //Funções para alterar os campos
   const alterarNome = (novoNome: string) => {
     setUsuario((valoresAnteriores) => ({
       ...valoresAnteriores,
@@ -44,6 +46,7 @@ export default function Cadastro() {
     }));
   };
 
+  //Verifica se o usuário está logado, não deixando acessar a página
   useEffect(() => {
     const { "restaurant-token": token } = parseCookies();
     if (token) {
@@ -51,6 +54,7 @@ export default function Cadastro() {
     }
   }, [router]);
 
+  //Requisição para cadastrar o usuário
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {

@@ -9,6 +9,7 @@ const mesa = () => {
     n_lugares: 2,
   });
 
+  //Página de dados da mesa
   return (
     <div>
       <h1>Mesa</h1>
